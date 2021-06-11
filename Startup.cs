@@ -14,6 +14,9 @@ using Microsoft.OpenApi.Models;
 using ChinaAQIDataCore.Models;
 using Microsoft.EntityFrameworkCore;
 using ChinaAQIDataCore.Service;
+using System.Text.Json;
+using ChinaAQIDataCore.Utils;
+using Newtonsoft.Json.Serialization;
 
 namespace ChinaAQIDataCore
 {
@@ -32,7 +35,10 @@ namespace ChinaAQIDataCore
             var connectString = Configuration.GetConnectionString("SQLServer");
             services.AddDbContext<AQIContext>(opt => opt.UseSqlServer(connectString));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver() { NamingStrategy = new SnakeCaseNamingStrategy() });
+                //.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = new LowerCaseNamingPolicy());
+           
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChinaAQIDataCore", Version = "v1" });

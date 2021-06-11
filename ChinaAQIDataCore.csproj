@@ -11,6 +11,8 @@
     <PackageReference Include="PinYinConverterCore" Version="1.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.8.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +20,8 @@
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="System.ServiceModel.Http" />
     <None Remove="Models\" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

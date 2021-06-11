@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ChinaAQIDataCore.Models;
 using ChinaAQIDataCore.Utils;
+using System.Linq;
 
 namespace ChinaAQIDataCore.Service
 {
@@ -61,16 +62,30 @@ namespace ChinaAQIDataCore.Service
                 set.Add(aqi);
             }
 
-            using var scope = _scopeFactory.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<AQIContext>();
-            context.Transcation.AddRange(set);
-            try
+
+
+            using (var scope = _scopeFactory.CreateScope())
             {
-                await context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("insert failed");
+                var context = scope.ServiceProvider.GetRequiredService<AQIContext>();
+
+                var exists = context.Transcation
+                    .FirstOrDefault(c => c.TimePoint == set.First().TimePoint);
+
+                if (exists != null)
+                {
+                    Console.WriteLine("TimePoint exists, skipped!");
+                    return;
+                }
+
+                context.Transcation.AddRange(set);
+                try
+                {
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("insert failed");
+                }
             }
 
 
