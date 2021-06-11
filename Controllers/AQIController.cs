@@ -34,7 +34,7 @@ namespace ChinaAQIDataCore.Controllers
         {
             //var endpoint = new EndpointAddress(new Uri("http://106.37.208.233:20035/emcpublish/ClientBin/Env-CnemcPublish-RiaServices-EnvCnemcPublishDomainService.svc/binary/GetAQIDataPublishLives"));
             // http://192.168.26.180:81/GetAQIDataPublishLives
-            HttpResponseMessage response = await client.GetAsync("http://192.168.26.180:81/GetAQIDataPublishLives");
+            HttpResponseMessage response = await client.GetAsync("http://106.37.208.233:20035/emcpublish/ClientBin/Env-CnemcPublish-RiaServices-EnvCnemcPublishDomainService.svc/binary/GetAQIDataPublishLives");
             response.EnsureSuccessStatusCode();
             var output = await response.Content.ReadAsByteArrayAsync();
             var xml = WcfBinaryConverter.ConvertWcfBinaryMessageToXml(output);
@@ -47,6 +47,11 @@ namespace ChinaAQIDataCore.Controllers
                 var aqi = new AQIDTO();
                 foreach (var p in aqi.GetType().GetProperties())
                 {
+                    if (p.Name == "CityPinyin") {
+                        p.SetValue(aqi, PinyinUtil.GetPinyin((GetNodeValue(node, "Area"))), null);
+                        continue;
+                    }
+
                     p.SetValue(aqi, (GetNodeValue(node, p.Name)), null);
                 }
                 set.Add(aqi);

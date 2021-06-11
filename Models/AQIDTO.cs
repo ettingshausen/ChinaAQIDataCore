@@ -16,6 +16,7 @@ namespace ChinaAQIDataCore.Models
         public string CO { get; set; }
         public string CO_24h { get; set; }
         public string CityCode { get; set; }
+        public string CityPinyin { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string Measure { get; set; }

@@ -51,6 +51,11 @@ namespace ChinaAQIDataCore.Service
                 var aqi = new AQIDTO();
                 foreach (var p in aqi.GetType().GetProperties())
                 {
+                    if (p.Name == "CityPinyin")
+                    {
+                        p.SetValue(aqi, PinyinUtil.GetPinyin((GetNodeValue(node, "Area"))), null);
+                        continue;
+                    }
                     p.SetValue(aqi, (GetNodeValue(node, p.Name)), null);
                 }
                 set.Add(aqi);
