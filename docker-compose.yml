@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  chinaaqidatacore:
+    image: ${DOCKER_REGISTRY-}chinaaqidatacore
+    build:
+      context: .
+      dockerfile: ./Dockerfile
