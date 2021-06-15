@@ -31,7 +31,7 @@ namespace ChinaAQIDataCore.Service
             _logger.LogInformation("Timed Background Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(30));
+                TimeSpan.FromMinutes(30));
 
             return Task.CompletedTask;
         }
