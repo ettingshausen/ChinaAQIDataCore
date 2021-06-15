@@ -13,7 +13,7 @@ namespace ChinaAQIDataCore.Models
                 .HasKey( c => new {c.Area, c.StationCode, c.TimePoint });
         }
 
-        public DbSet<AQIDTO> Transcation { get; set; }
+        public DbSet<AQIDTO> AQIItems { get; set; }
 
     }
 }

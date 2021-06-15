@@ -68,7 +68,7 @@ namespace ChinaAQIDataCore.Service
             {
                 var context = scope.ServiceProvider.GetRequiredService<AQIContext>();
 
-                var exists = context.Transcation
+                var exists = context.AQIItems
                     .FirstOrDefault(c => c.TimePoint == set.First().TimePoint);
 
                 if (exists != null)
@@ -77,7 +77,7 @@ namespace ChinaAQIDataCore.Service
                     return;
                 }
 
-                context.Transcation.AddRange(set);
+                context.AQIItems.AddRange(set);
                 try
                 {
                     await context.SaveChangesAsync();
