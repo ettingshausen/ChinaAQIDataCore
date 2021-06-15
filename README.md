@@ -6,8 +6,8 @@
 ![ScreenShot1](http://ww2.sinaimg.cn/bmiddle/685ea4fagw1eyymnnzflij20u01hc14k.jpg)
 ![ScreenShot2](http://ww1.sinaimg.cn/bmiddle/685ea4fagw1eyymnpw4vdj20u01hc45y.jpg)
 
-实现参考了[ChinaAQIData](https://github.com/geoinsights/ChinaAQIData)， 做了些改进，抓取数据与接口服务放在了一起，每半个小时会抓取一次数据。
-
+实现参考了[ChinaAQIData](https://github.com/geoinsights/ChinaAQIData)， 做了些改进，抓取数据与接口服务放在了一起，每半个小时会抓取一次数据。  
+WCF Binary 解析参考了 [WCF-Binary-Message-Inspector](https://github.com/waf/WCF-Binary-Message-Inspector)
 
 
 # Thanks to
@@ -15,3 +15,5 @@
 1. http://www.pm25.in
 1. https://openaq.org/
 1. https://github.com/geoinsights/ChinaAQIData
+1. https://github.com/waf/WCF-Binary-Message-Inspector
+1. https://github.com/netcorepal/PinYinConverterCore
