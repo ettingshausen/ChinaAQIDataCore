@@ -24,6 +24,7 @@ namespace ChinaAQIDataCore.Controllers
         {
             var latestOne =  _context.AQIItems
                 .Where(c => c.CityPinyin.StartsWith(cityNamePinyin.ToUpper()))
+                .OrderByDescending(c => c.TimePoint)
                 .FirstOrDefault();
             if (latestOne == null) {
 
