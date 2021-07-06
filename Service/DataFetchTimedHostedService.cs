@@ -28,7 +28,7 @@ namespace ChinaAQIDataCore.Service
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Timed Background Service is starting.");
+            _logger.LogInformation($"{DateTime.Now.ToLongTimeString()} Timed Background Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromMinutes(30));
@@ -38,7 +38,7 @@ namespace ChinaAQIDataCore.Service
 
         private async void DoWork(object state)
         {
-            _logger.LogInformation("Fetch Service is working.");
+            _logger.LogInformation($"{DateTime.Now.ToLongTimeString()} Fetch Service is working.");
             HttpResponseMessage response = await client.GetAsync("http://106.37.208.233:20035/emcpublish/ClientBin/Env-CnemcPublish-RiaServices-EnvCnemcPublishDomainService.svc/binary/GetAQIDataPublishLives");
             response.EnsureSuccessStatusCode();
             var output = await response.Content.ReadAsByteArrayAsync();
@@ -73,7 +73,7 @@ namespace ChinaAQIDataCore.Service
 
                 if (exists != null)
                 {
-                    Console.WriteLine("TimePoint exists, skipped!");
+                    _logger.LogInformation($"{DateTime.Now.ToLongTimeString()} TimePoint exists, skipped!");
                     return;
                 }
 
@@ -84,7 +84,7 @@ namespace ChinaAQIDataCore.Service
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("insert failed");
+                    _logger.LogError($"{DateTime.Now.ToLongTimeString()} insert failed! message: {ex.Message}");
                 }
             }
 
